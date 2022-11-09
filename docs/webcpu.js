@@ -248,7 +248,7 @@ var webcpu = (function (exports) {
                 const stats = await this._testWorkers(workers, loops);
                 console.log('stats = ', stats);
                 if (!this._areAllCoresValid(baseStats, stats, 0.9)) {
-                    console.log('_areAllCoresValid = false');
+                    console.log('_areAllCoresValid = false, thresholdCount = ', thresholdCount, ", threadCount = ", threadCount);
                     --threadCount;
                     ++thresholdCount;
                     if (thresholdCount > 3) {
