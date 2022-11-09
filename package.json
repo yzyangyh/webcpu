@@ -1,0 +1,45 @@
+{
+    "name": "webcpu",
+    "version": "0.4.8",
+    "description": "Estimate the number of usable cores to perform data processing in the browser",
+    "entry": "src/index.js",
+    "main": "dist/esm/webcpu.js",
+    "module": "dist/esm/webcpu.js",
+    "repository": "https://github.com/darionco/WebCPU.git",
+    "author": "Dario Segura",
+    "license": "MIT",
+    "keywords": [
+        "cpu",
+        "threads",
+        "webworkers",
+        "workers",
+        "wasm"
+    ],
+    "scripts": {
+        "docs": "documentation build src/** -f md -o README.md --markdown-toc false",
+        "build": "run-s build:dev build:docs",
+        "build:dev": "rollup --config",
+        "build:docs": "copyfiles -f \"./www/*.*\" \"./dist/iife/*.*\" ./docs",
+        "start": "cross-env TARGET='browser' rollup --config --watch",
+        "wasm": "emcc src/wasm/*.c -O3 -s WASM=1 -o src/wasm/workload.wasm -s TOTAL_MEMORY=1048576 -s TOTAL_STACK=0 -s ERROR_ON_UNDEFINED_SYMBOLS=0 && wasm2wat src/wasm/workload.wasm -o src/wasm/workload.wat",
+        "prepublishOnly": "npm-run-all build"
+    },
+    "devDependencies": {
+        "copyfiles": "^2.4.1",
+        "cross-env": "^7.0.3",
+        "documentation": "^13.1.0",
+        "eslint": "^7.17.0",
+        "live-server": "^1.2.1",
+        "npm-run-all": "^4.1.5",
+        "rollup": "^2.36.1",
+        "rollup-plugin-eslint": "^7.0.0",
+        "rollup-plugin-url": "^3.0.1",
+        "rollup-plugin-web-worker-loader": "^1.6.0"
+    },
+    "files": [
+        "dist/"
+    ],
+    "dependencies": {
+        "webcpu": "^0.4.8"
+    }
+}
