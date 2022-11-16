@@ -227,7 +227,7 @@ var webcpu = (function (exports) {
             workers.push(await this._initWorker(wasmModule));
             await this._testWorkers(workers, loops);
             baseStats = await this._testWorkers(workers, loops);
-            console.log('baseStats = ', baseStats);
+            console.log('baseStats = ', JSON.stringify(baseStats));
 
             if (hardcore) {
                 this._killWorkers(workers);
@@ -246,7 +246,7 @@ var webcpu = (function (exports) {
                 promises.length = 0;
 
                 const stats = await this._testWorkers(workers, loops);
-                console.log('stats = ', stats);
+                console.log('stats = ', JSON.stringify(stats));
                 if (!this._areAllCoresValid(baseStats, stats, 0.9)) {
                     console.log('_areAllCoresValid = false, thresholdCount = ', thresholdCount, ", threadCount = ", threadCount);
                     --threadCount;
