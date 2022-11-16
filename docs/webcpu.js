@@ -357,6 +357,7 @@ var webcpu = (function (exports) {
         static _aggregateResults(stats, loops) {
             for (let i = 0; i < stats.length; ++i) {
                 stats[i].elapsed /= loops;
+                stats[i].elapsed = parseInt(stats[i].elapsed *100)/100;
                 stats[i].iterations /= loops;
             }
 
